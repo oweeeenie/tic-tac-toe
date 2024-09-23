@@ -46,4 +46,34 @@ function Game() {
       return;
     }
   }
+  function checkWinner(X, O) {
+    for (let i = 0; i < winningCombinations.length; i++) {
+      const combination = winningCombinations[i];
+      const value1 = board[combination[0]];
+      const value2 = board[combination[1]];
+      const value3 = board[combination[2]];
+      if (value1 === value2 && value2 === value3 && value1 !== "") {
+        return value1;
+      }
+      if (value1 === "X") {
+        // code to increment
+        // code to update score in html
+      } else {
+        // code to incremement player O
+        // code to update score in HTML (player o)
+      }
+      // code to increment roundd number and update html
+    }
+  }
+
+  const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
 }
