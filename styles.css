@@ -40,6 +40,7 @@ img {
   background-color: #6d6875;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -154,4 +155,25 @@ img {
 
 .cell:hover {
   background-color: rgba(200, 200, 200, 0.05);
+}
+
+.page-title {
+  background-color: #6d6875;
+  color: #cdb4db;
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 30px;
+}
+
+.page-footer {
+  background-color: #6d6875;
+  color: #cdb4db;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 10px;
 }

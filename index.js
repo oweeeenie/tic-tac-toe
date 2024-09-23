@@ -30,7 +30,6 @@ function Player(name, mark) {
   };
   return player;
 }
-
 const playerOne = Player("Player X", "X");
 const playerTwo = Player("Player O", "O");
 
