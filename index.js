@@ -33,3 +33,18 @@ function Player(name, mark) {
 
 const playerOne = Player("Player X", "X");
 const playerTwo = Player("Player O", "O");
+
+function Game() {
+  let currentPlayer = playerOne;
+  let gameStatus = active;
+
+  function switchPlayer() {
+    if (currentPlayer === playerOne) {
+      currentPlayer = playerTwo;
+      return;
+    } else if (currentPlayer === playerTwo) {
+      currentPlayer = playerOne;
+      return;
+    }
+  }
+}
