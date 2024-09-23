@@ -22,6 +22,7 @@ ul {
   margin: 0;
   padding: 0;
   font-weight: normal;
+  font-family: monospace;
 }
 
 ol,
@@ -32,4 +33,125 @@ ul {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.page-layout {
+  height: 100vh;
+  background-color: #6d6875;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-radius: 2rem;
+}
+
+.cell {
+  padding: 5rem;
+  background-color: #6d6875;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  bottom: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.stats .player-1 {
+  color: #ffc8dd;
+}
+
+.stats .round {
+  color: #cdb4db;
+}
+
+.stats .player-2 {
+  color: #a2d2ff;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #cdb4db;
+}
+
+.game-container {
+  border: 0.4rem solid #cdb4db;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+.cell:nth-child(1) {
+  border-top: none;
+  border-left: none;
+  border-right: 0.5rem solid #cdb4db;
+  border-bottom: 0.5rem solid #cdb4db;
+}
+
+.cell:nth-child(2) {
+  border-top: none;
+  border-left: none;
+  border-right: 0.5rem solid #cdb4db;
+  border-bottom: 0.5rem solid #cdb4db;
+}
+
+.cell:nth-child(3) {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.5rem solid #cdb4db;
+}
+
+.cell:nth-child(4) {
+  border-top: none;
+  border-left: none;
+  border-right: 0.5rem solid #cdb4db;
+  border-bottom: 0.5rem solid #cdb4db;
+}
+
+.cell:nth-child(5) {
+  border-top: none;
+  border-left: none;
+  border-right: 0.5rem solid #cdb4db;
+  border-bottom: 0.5rem solid #cdb4db;
+}
+
+.cell:nth-child(6) {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.5rem solid #cdb4db;
+}
+
+.cell:nth-child(7) {
+  border-top: none;
+  border-left: none;
+  border-right: 0.5rem solid #cdb4db;
+  border-bottom: none;
+}
+
+.cell:nth-child(8) {
+  border-top: none;
+  border-left: none;
+  border-right: 0.5rem solid #cdb4db;
+  border-bottom: none;
+}
+
+.cell:nth-child(9) {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+.cell:hover {
+  background-color: rgba(200, 200, 200, 0.05);
 }
