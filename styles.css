@@ -51,8 +51,11 @@ img {
 }
 
 .cell {
-  padding: 5rem;
   background-color: #6d6875;
+  color: #cdb4db;
+  height: 150px;
+  width: 150px;
+  font-size: 2.5rem;
 }
 
 .stats {
@@ -88,6 +91,15 @@ img {
   border: 0.4rem solid #cdb4db;
   border-radius: 2rem;
   padding: 2rem;
+}
+
+.winner-text {
+  color: lightgray;
+  position: relative;
+  bottom: 15px;
+  font-weight: bold;
+  font-size: 2.5rem;
+  height: 40px;
 }
 
 .cell:nth-child(1) {

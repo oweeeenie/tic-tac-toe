@@ -15,13 +15,13 @@ const Gameboard = (function () {
         board[index] = mark;
         return true;
       } else {
-        console.log("This spot is already being used!");
         return false;
       }
     } else {
       return false;
     }
   }
+
   return {
     gameboardStatus: getBoard,
     resetBoard,
@@ -30,60 +30,45 @@ const Gameboard = (function () {
 })();
 
 function Player(name, mark) {
-  const player = {
-    name: name,
-    mark: mark,
-  };
-  return player;
+  return { name, mark };
 }
+
 const playerOne = Player("Player X", "X");
 const playerTwo = Player("Player O", "O");
 
 function Game() {
-  initializeGame();
+  let currentPlayer = playerOne;
+  let gameStatus = "active";
+
   let scoreX = 0;
   let scoreO = 0;
   let currentRound = 1;
-  let currentPlayer = playerOne;
-  let gameStatus = active;
+
+  initializeGame();
 
   function initializeGame() {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell, index) => {
-      cell.addEventListener("click", () => {
-        if (Gameboard.placeMark(index, currentPlayer.mark)) {
-          cell.textContent = currentPlayer.mark;
-          const resultMessage = endGame();
-          if (resultMessage) {
-            resultMessage;
-            resetGame();
-          }
-          switchPlayer();
-        }
-      });
+      cell.addEventListener("click", () => handleClick(cell, index));
     });
+    const roundElement = document.querySelector(".round");
+    roundElement.textContent = `Round: ${currentRound}`;
+  }
+
+  function handleClick(cell, index) {
+    const markPlaced = Gameboard.placeMark(index, currentPlayer.mark);
+    if (gameStatus === "active" && markPlaced) {
+      cell.textContent = currentPlayer.mark;
+      if (checkWinner()) {
+        gameStatus = "over";
+      } else {
+        switchPlayer();
+      }
+    }
   }
 
   function switchPlayer() {
-    if (currentPlayer === playerOne) {
-      currentPlayer = playerTwo;
-      return;
-    } else if (currentPlayer === playerTwo) {
-      currentPlayer = playerOne;
-      return;
-    }
-  }
-  function checkWinner(X, O) {
-    for (let i = 0; i < winningCombinations.length; i++) {
-      const combination = winningCombinations[i];
-      const value1 = board[combination[0]];
-      const value2 = board[combination[1]];
-      const value3 = board[combination[2]];
-      if (value1 === value2 && value2 === value3 && value1 !== "") {
-        return value1;
-      }
-    }
-    return null;
+    currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
   }
 
   const winningCombinations = [
@@ -97,32 +82,84 @@ function Game() {
     [2, 4, 6],
   ];
 
-  function endGame(winner, draw) {
-    const winnerTextElement = document.querySelector(".winner-text");
-    let result = checkWinner();
-    if (result === "X") {
-      winnerTextElement.textContent = "Player X wins!!";
-      resetGame();
-    } else if (result === "O") {
-      winnerTextElement.textContent = "Player O wins!!";
-      resetGame();
-    } else if (result === null) {
+  function checkWinner() {
+    const board = Gameboard.gameboardStatus();
+    for (const combination of winningCombinations) {
+      const [a, b, c] = combination;
+      if (board[a] === board[b] && board[b] === board[c] && board[a] !== "") {
+        const winnerTextElement = document.querySelector(".winner-text");
+        winnerTextElement.textContent = `${board[a]} wins this round!!`;
+
+        if (board[a] === "X") {
+          scoreX++;
+        } else {
+          scoreO++;
+        }
+
+        updateScores();
+        setTimeout(() => resetGame(), 3000);
+        return true;
+      }
+    }
+
+    if (!board.includes("")) {
+      const winnerTextElement = document.querySelector(".winner-text");
       winnerTextElement.textContent = "It's a draw!";
-      resetGame();
+      setTimeout(() => resetGame(), 3000);
+      return true;
+    }
+
+    return false;
+  }
+
+  function updateScores() {
+    const playerXScoreElement = document.querySelector(".player-X");
+    const playerOScoreElement = document.querySelector(".player-O");
+
+    playerXScoreElement.textContent = `Player X: ${scoreX}`;
+    playerOScoreElement.textContent = `Player O: ${scoreO}`;
+
+    checkOverallWinner();
+  }
+
+  function checkOverallWinner() {
+    if (scoreX === 3) {
+      const winnerTextElement = document.querySelector(".winner-text");
+      winnerTextElement.textContent = "Player X is the overall winner!";
+      gameStatus = "over";
+      setTimeout(() => {
+        scoreX = 0;
+        scoreO = 0;
+        currentRound = 0;
+        updateScores();
+      }, 3000);
+    } else if (scoreO === 3) {
+      const winnerTextElement = document.querySelector(".winner-text");
+      winnerTextElement.textContent = "Player O is the overall winner!";
+      gameStatus = "over";
+
+      setTimeout(() => {
+        scoreX = 0;
+        scoreO = 0;
+        currentRound = 0;
+        updateScores();
+      }, 3000);
     }
   }
+
   function resetGame() {
-    gameboard.resetBoard();
+    Gameboard.resetBoard();
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
       cell.textContent = "";
     });
+    currentRound++;
+
     currentPlayer = playerOne;
-    const roundElement = document.querySelector(".round");
-    roundElement.textContent = `Round: ${currentRound}`;
+    gameStatus = "active";
     const winnerTextElement = document.querySelector(".winner-text");
     winnerTextElement.textContent = "";
+    initializeGame();
   }
 }
-// if (value1 === "X") { scoreX++; document.querySelector(".player-X").textContent = scoreX;
-// } else {scoreO++; document.querySelector(".player-O").textContent = scoreO;
+const ticTacToeGame = Game();
