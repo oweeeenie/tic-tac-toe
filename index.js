@@ -34,6 +34,9 @@ const playerOne = Player("Player X", "X");
 const playerTwo = Player("Player O", "O");
 
 function Game() {
+  let scoreX = 0;
+  let scoreO = 0;
+  let currentRound = 1;
   let currentPlayer = playerOne;
   let gameStatus = active;
 
@@ -56,14 +59,14 @@ function Game() {
         return value1;
       }
       if (value1 === "X") {
-        // code to increment
-        // code to update score in html
+        scoreX++;
+        document.querySelector(".player-X").textContent = scoreX;
       } else {
-        // code to incremement player O
-        // code to update score in HTML (player o)
+        scoreO++;
+        document.querySelector(".player-O").textContent = scoreO;
       }
-      // code to increment roundd number and update html
     }
+    return null;
   }
 
   const winningCombinations = [

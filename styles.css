@@ -63,7 +63,7 @@ img {
   font-size: 1.3rem;
 }
 
-.stats .player-1 {
+.stats .player-X {
   color: #ffc8dd;
 }
 
@@ -71,7 +71,7 @@ img {
   color: #cdb4db;
 }
 
-.stats .player-2 {
+.stats .player-O {
   color: #a2d2ff;
 }
 
